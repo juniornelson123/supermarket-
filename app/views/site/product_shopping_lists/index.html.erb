@@ -1,0 +1,38 @@
+<%- model_class = ProductShoppingList -%>
+<div class="page-header">
+
+  <h1><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1>
+  
+<%= link_to 'continuar listando', "/site/establishments/#{params[:establishment_id] }/continue/#{params[:shopping_list_id]}", class: "btn btn-primary btn-xs" %>
+</div>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th><%= model_class.human_attribute_name(:product) %></th>
+      <th><%= model_class.human_attribute_name(:price) %></th>
+      <th><%= model_class.human_attribute_name(:name_list) %></th>
+      <th><%=t '.actions', :default => t("helpers.actions") %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @product_shopping_lists.each do |product_shopping_list| %>
+      <tr>
+        <td><%= product_shopping_list.product.name %></td>
+        <td><%= product_shopping_list.product.price %></td>
+        <td><%= product_shopping_list.shopping_list.name %></td>
+        <td>
+          <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+                      site_establishment_shopping_list_product_shopping_list_path(id: product_shopping_list.id),
+                      :method => :delete,
+                      :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+                      :class => 'btn btn-xs btn-danger' %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+
+<%= link_to t('.back', :default => t("helpers.links.back")),
+              site_establishment_shopping_lists_path, :class => 'btn btn-default'  %>

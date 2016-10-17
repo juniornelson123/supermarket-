@@ -1,0 +1,26 @@
+<%- model_class = Establishment -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1>
+</div>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th><%= model_class.human_attribute_name(:name) %></th>
+      <th><%= model_class.human_attribute_name(:address) %></th>
+      <th><%=t '.actions', :default => t("helpers.actions") %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @establishments.each do |establishment| %>
+      <tr>
+        <td><%= establishment.name %></td>
+        <td><%= establishment.address %></td>
+        <td>
+          <%= link_to "detalhar", site_establishment_path(establishment), class: "btn btn-primary btn-xs" %>
+          <%= link_to "selecionar", site_establishment_products_path(establishment_id: establishment.id), :class => 'btn btn-xs btn-warning'  %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+

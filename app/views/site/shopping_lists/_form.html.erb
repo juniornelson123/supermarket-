@@ -1,0 +1,10 @@
+<%= simple_form_for @shopping_list, :html => { :class => 'form-horizontal' } do |f| %>
+  <%= f.input :user_id %>
+  <%= error_span(@shopping_list[:user_id]) %>
+  <%= f.input :establishment_id %>
+  <%= error_span(@shopping_list[:establishment_id]) %>
+
+  <%= f.button :submit, :class => 'btn-primary' %>
+  <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                shopping_lists_path, :class => 'btn btn-default' %>
+<% end %>
